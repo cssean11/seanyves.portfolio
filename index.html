@@ -173,16 +173,48 @@
             max-width: 600%;
             margin-left: 36px; /* Add left margin to the profile image */
         }
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s; /* Add transition for smooth color change */
+        }
 
+        .highlight-text {
+            color: white;
+        }
+
+        .container {
+            text-align: left;
+            padding: 20px; /* Adjust padding as needed */
+            padding-right: 50px; /* Add padding to the right side */
+        }
+        .toggle-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
     </style>
     <title>Sean Yves Babiano - Portfolio</title>
 </head>
 <body>
+    <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
     <div class="container">
         <h1>
             <span style="font-weight: normal; font-size: 14px;">Portfolio</span>
             <span class="copyright">Sean Yves Babiano 2024©</span>
         </h1>
+
         <hr><!-- Only one white line -->
 
         <h2>
@@ -231,10 +263,35 @@
             <span style="font-weight: bold;">Projects</span>
             <span class="arrow">&#10154;</span>
         </h2>
+        <script>
+            function toggleTheme() {
+                const body = document.body;
+                body.classList.toggle("dark-theme");
+    
+                const isDarkTheme = body.classList.contains("dark-theme");
+                const textColor = isDarkTheme ? "white" : "black";
+    
+                body.style.backgroundColor = isDarkTheme ? "black" : "white";
+                body.style.color = textColor;
+    
+                // Update text color for specific elements
+                const highlightTextElements = document.querySelectorAll('.highlight-text');
+                highlightTextElements.forEach(element => {
+                    element.style.color = isDarkTheme ? "white" : "black";
+                });
+    
+                // Update line color
+                const hrElements = document.querySelectorAll('hr');
+                hrElements.forEach(element => {
+                    element.style.borderColor = isDarkTheme ? "white" : "black";
+                });
+            }
+        </script>
         <hr><!-- Only one white line -->
     </div>
 </body>
 </html>
+
 
 
 
