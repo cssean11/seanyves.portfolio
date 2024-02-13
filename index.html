@@ -274,6 +274,31 @@
             <span class="arrow">&#10154;</span>
         </h2>
         <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
+        <audio id="audioPlayer" autoplay loop muted>
+            <source src="seanyvesportfolio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <audio id="audioPlayer" autoplay loop muted>
+            <source src="seanyvesportfolio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const audioPlayer = document.getElementById('audioPlayer');
+        
+                // Unmute the audio to allow autoplay
+                audioPlayer.muted = false;
+        
+                // Play the audio on a user gesture (click)
+                document.addEventListener('click', function () {
+                    if (audioPlayer.paused) {
+                        audioPlayer.play();
+                    }
+                });
+            });
+        </script>
         <script>
             function toggleTheme() {
                 const body = document.body;
@@ -309,8 +334,10 @@
                 toggleButton.style.color = isDarkTheme ? "black" : "white";
             }
         </script>
+        
         <hr><!-- Only one white line -->
     </div>
+    
 </body>
 </html>
 
