@@ -204,6 +204,16 @@
             padding: 10px;
             cursor: pointer;
         }
+        .toggle-button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 4px; /* Adjust padding to make it smaller */
+            font-size: 12px; /* Adjust font-size to make it smaller */
+            cursor: pointer;
+        }
+    
+
     </style>
     <title>Sean Yves Babiano - Portfolio</title>
 </head>
@@ -285,12 +295,24 @@
                 hrElements.forEach(element => {
                     element.style.borderColor = isDarkTheme ? "white" : "black";
                 });
+    
+                // Invert colors for GitHub and LinkedIn logos
+                const contactIcons = document.querySelectorAll('.contact-icons img');
+                contactIcons.forEach(icon => {
+                    icon.style.filter = isDarkTheme ? "invert(1)" : "invert(0)";
+                });
+    
+                // Update toggle button padding color
+                const toggleButton = document.querySelector('.toggle-button');
+                toggleButton.style.backgroundColor = isDarkTheme ? "white" : "black";
+                toggleButton.style.color = isDarkTheme ? "black" : "white";
             }
         </script>
         <hr><!-- Only one white line -->
     </div>
 </body>
 </html>
+
 
 
 
