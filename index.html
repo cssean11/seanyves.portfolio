@@ -212,7 +212,70 @@
             font-size: 12px; /* Adjust font-size to make it smaller */
             cursor: pointer;
         }
-    
+        .calculator {
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 300px;
+            margin-left: 650px;
+            margin-right: 36px;
+            margin-top: -360px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator input {
+            grid-column: span 4;
+            padding: 10px;
+            font-size: 18px;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .calculator button {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            background-color: #e6e6e6;
+        }
+
+        .calculator button.operator {
+            background-color: #7f8c8d;
+            color: white;
+        }
+
+        .calculator button.double {
+            grid-column: span 2;
+        }
+
+        .calculator button:hover {
+            background-color: #ccc;
+        }
+
+        .calculator button:active {
+            background-color: #bdc3c7;
+        }
+
+        .dancing-gif {
+            max-width: 100%;
+            margin-left: 36px;
+            margin-right: 36px;
+        }
+    </style>
+
+
+
+
+
+
 
     </style>
     <title>Sean Yves Babiano - Portfolio</title>
@@ -259,21 +322,56 @@
                 <img src="github-white.png" alt="GitHub Logo">
             </a>
         </div>
+        
+        
+        
         <!-- Profile image -->
         <img src="thisisme.png" alt="Description of the image" class="profile-image">
     
     
         <p2 class="highlight-text">Sean Yves Babiano, Web Developer<br>科斯莫</p2>
-
+        
         <!-- LinkedIn and GitHub icons -->
        
     
+        
         <hr><!-- Only one white line -->
         <h2>
             <span style="font-weight: bold;">Projects</span>
             <span class="arrow">&#10154;</span>
         </h2>
+        <!-- Projects Section -->
         <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
+        <!-- Calculator -->
+        <div class="calculator">
+            <input type="text" id="calculator-screen" readonly>
+            <button onclick="appendToScreen('7')">7</button>
+            <button onclick="appendToScreen('8')">8</button>
+            <button onclick="appendToScreen('9')">9</button>
+            <button class="operator" onclick="appendToScreen('/')">/</button>
+        
+            <button onclick="appendToScreen('4')">4</button>
+            <button onclick="appendToScreen('5')">5</button>
+            <button onclick="appendToScreen('6')">6</button>
+            <button class="operator" onclick="appendToScreen('*')">*</button>
+        
+            <button onclick="appendToScreen('1')">1</button>
+            <button onclick="appendToScreen('2')">2</button>
+            <button onclick="appendToScreen('3')">3</button>
+            <button class="operator" onclick="appendToScreen('-')">-</button>
+        
+            <button onclick="appendToScreen('0')">0</button>
+            <button onclick="appendToScreen('.')">.</button>
+            <button class="operator" onclick="calculate()">=</button>
+            <button class="operator double" onclick="appendToScreen('+')">+</button>
+        
+            <button class="operator" onclick="clearScreen()">C</button>
+        </div>
+        <hr><!-- Only one white line -->
+        <!-- ... (Remaining content) ... -->
+    </div>
+
+
         <audio id="audioPlayer" autoplay loop muted>
             <source src="seanyvesportfolio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
@@ -334,6 +432,29 @@
                 toggleButton.style.color = isDarkTheme ? "black" : "white";
             }
         </script>
+        <script>
+            let screen = document.getElementById('calculator-screen');
+        
+            function appendToScreen(value) {
+                screen.value += value;
+            }
+        
+            function clearScreen() {
+                screen.value = '';
+            }
+        
+            function calculate() {
+                try {
+                    const result = eval(screen.value);
+                    screen.value = result;
+                } catch (error) {
+                    screen.value = 'Error';
+                }
+            }
+        </script>
+        
+        
+        
         
         <hr><!-- Only one white line -->
     </div>
