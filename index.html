@@ -90,6 +90,7 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+     
 
         .profile-image {
             height: auto;
@@ -216,10 +217,10 @@
             background-color: #f8f8f8;
             border: 1px solid #ccc;
             border-radius: 8px;
-            width: 300px;
-            margin-left: 650px;
+            width: 200px;
+            margin-left: 900px;
             margin-right: 36px;
-            margin-top: -360px;
+            margin-top: -370px;
             padding: 20px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -265,10 +266,72 @@
         }
 
         .dancing-gif {
-            max-width: 100%;
-            margin-left: 36px;
-            margin-right: 36px;
+            max-width: 50%;
+            margin-top: -500px;
+            margin-left: 405px;
+            margin-right: 0px;
         }
+       
+    
+
+        
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            margin-top: 30px;
+            margin-left: 100px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #fff;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .cell:hover {
+            background-color: #ddd;
+        }
+
+        .cell.x {
+            color: #e74c3c; /* Red color for X */
+        }
+
+        .cell.o {
+            color: #3498db; /* Blue color for O */
+        }
+
+        .message {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #2980b9(198, 100%, 72%);
+        }
+
+        .reset-button {
+    margin-top: 0px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #999b9d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-left: 200px;
+}
+
+.reset-button:hover {
+    background-color: #2980b9;
+}
+   
     </style>
 
 
@@ -337,11 +400,13 @@
         
         <hr><!-- Only one white line -->
         <h2>
-            <span style="font-weight: bold;">Projects</span>
+            <span style="font-weight: bold; font-size: 30;">Projects</span>
             <span class="arrow">&#10154;</span>
         </h2>
         <!-- Projects Section -->
-        <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
+        <div id="board"></div>
+    <div class="message"></div>
+    <button class="reset-button" onclick="resetGame()">Reset Game</button>
         <!-- Calculator -->
         <div class="calculator">
             <input type="text" id="calculator-screen" readonly>
@@ -367,9 +432,19 @@
         
             <button class="operator" onclick="clearScreen()">C</button>
         </div>
-        <hr><!-- Only one white line -->
+        
+       
+
+        
         <!-- ... (Remaining content) ... -->
+     <body>
     </div>
+    <div>
+     <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
+     <hr style="border: 1px solid white;"><!-- Only one white line -->
+    </body>  
+    </div>
+   
 
 
         <audio id="audioPlayer" autoplay loop muted>
@@ -381,7 +456,7 @@
             <source src="seanyvesportfolio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
-        
+       
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const audioPlayer = document.getElementById('audioPlayer');
@@ -452,25 +527,120 @@
                 }
             }
         </script>
+       <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const board = document.getElementById('board');
+            const cells = Array.from({ length: 9 }, (_, index) => createCell(index));
+            let currentPlayer = 'X';
+            let gameBoard = ['', '', '', '', '', '', '', '', ''];
+            let winner = null;
+
+            cells.forEach(cell => board.appendChild(cell));
+
+            function createCell(index) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.addEventListener('click', () => handleCellClick(index));
+                return cell;
+            }
+
+            function handleCellClick(index) {
+                if (gameBoard[index] === '' && !winner) {
+                    gameBoard[index] = currentPlayer;
+                    cells[index].textContent = currentPlayer;
+                    cells[index].classList.add(currentPlayer.toLowerCase());
+                    togglePlayer();
+
+                    checkWinner();
+
+                    if (currentPlayer === 'O' && !winner) {
+                        setTimeout(() => {
+                            makeAIMove();
+                            checkWinner();
+                        }, 100);
+                    }
+                }
+            }
+
+            function togglePlayer() {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+
+            function checkWinner() {
+                const winningCombos = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                    [0, 4, 8], [2, 4, 6]
+                ];
+
+                for (const combo of winningCombos) {
+                    const [a, b, c] = combo;
+                    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                        winner = gameBoard[a];
+                        displayWinner();
+                        return;
+                    }
+                }
+
+                if (!gameBoard.includes('')) {
+                    winner = 'T';
+                    displayWinner();
+                }
+            }
+
+            function displayWinner() {
+                const message = document.querySelector('.message');
+                if (winner === 'T') {
+                    message.textContent = "It's a Tie!";
+                } else if (winner) {
+                    message.textContent = `Player ${winner} won!`;
+                }
+            }
+
+            function makeAIMove() {
+                const bestMove = getBestMove(gameBoard, 'O');
+                if (bestMove !== undefined) {
+                    gameBoard[bestMove] = 'O';
+                    cells[bestMove].textContent = 'O';
+                    cells[bestMove].classList.add('o');
+                    togglePlayer();
+                }
+            }
+
+            function getBestMove(board, player) {
+                // The minimax and getEmptyCells functions remain unchanged
+                // ...
+
+                return bestMove;
+            }
+
+            function resetGame() {
+                currentPlayer = 'X';
+                gameBoard = ['', '', '', '', '', '', '', '', ''];
+                winner = null;
+                cells.forEach(cell => {
+                    cell.textContent = '';
+                    cell.classList.remove('x', 'o');
+                });
+                const message = document.querySelector('.message');
+                message.textContent = '';
+            }
+
+            const resetButton = document.querySelector('.reset-button');
+            resetButton.addEventListener('click', resetGame);
+        });
+    </script>
         
         
         
+       
+     
+  
         
-        <hr><!-- Only one white line -->
     </div>
     
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
