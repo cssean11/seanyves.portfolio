@@ -60,7 +60,13 @@
 
         h2 .arrow:hover {
             transform: rotate(45deg); 
-        }
+        }h4 {
+    font-size: 30px;
+    margin-bottom: 5px;
+    margin-left: 60px; /* Adjust this margin value as needed */
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
 
         p1 {
             font-size: 70px;
@@ -330,17 +336,111 @@
 
 .reset-button:hover {
     background-color: #2980b9;
+}.horizontal-line {
+    width: calc(100% - 70px); /* Adjust width as needed */
+    border: 1px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px; /* Add left margin to align with other lines */
 }
-   
+
+
+.form-group {
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+label {
+    color: white; /* Set label text color to white */
+}input[type="name"],
+textarea {
+    background-color: transparent; /* Set transparent background */
+    border: 2px solid white; /* Set white border */
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    color: white; /* Set text color to white */
+    width: 100%; /* Make the input and textarea fill the container */
+}
+
+input[type="email"],
+textarea {
+    background-color: transparent; /* Set transparent background */
+    border: 2px solid white; /* Set white border */
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 4px; /* Optional: Add rounded corners */
+    color: white; /* Set text color to white */
+    width: 100%; /* Make the input and textarea fill the container */
+}h4 .arrow {
+            color: rgb(67, 67, 67);
+            font-size: 24px;
+            margin-left: 5px;
+            margin-right: 5px;
+            line-height: 1; /* Adjust line-height for vertical alignment */
+            transition: transform 0.3s ease-out;
+            display: inline-block;
+            transform: rotate(0deg); /* Initial rotation of the arrow */
+
+        }
+        h4 .arrow:hover {
+            transform: rotate(45deg); 
+        }.form-group {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.input-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Adjust background color as needed */
+    border: 2px solid white;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-left: 140px; /* Add left margin as needed */
+    margin-right: 370px; /* Add right margin as needed */
+}
+
+input[type="name"],
+input[type="email"],
+textarea {
+    width: calc(100% - 40px); /* Adjust width and margin as needed */
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+input[type="submit"] {
+    background-color: #ff6200; /* Dark Orange background color */
+    color: white; /* White text color */
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-left: 800px;
+}
+
+input[type="submit"]:hover {
+    background-color: #FF8C00; /* Adjust hover background color if needed */
+}
+
+
+
+
     </style>
 
 
 
 
 
-
-
-    </style>
     <title>Sean Yves Babiano - Portfolio</title>
 </head>
 <body>
@@ -437,7 +537,7 @@
 
         
         <!-- ... (Remaining content) ... -->
-     <body>
+     
     </div>
     <div>
      <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
@@ -629,15 +729,41 @@
             resetButton.addEventListener('click', resetGame);
         });
     </script>
-        
-        
-        
-       
-     
-  
-        
-    </div>
+        <hr class="horizontal-line">
+
     
+
+    <h4>
+        <span style="font-weight: bold;">Email Me</span>
+        <span class="arrow"><strong>&#129126;</strong></span>
+    </h4>
+
+
+        <!-- ... (Previous content) ... -->
+
+           
+            <!-- Email Form -->
+            <form id="emailForm">
+            <div class="form-group input-box">
+                <label for="userName">Name</label>
+                <input type="name" id="userName" name="userName" required>
+            </div>
+            <div class="form-group input-box">
+                <label for="userEmail">Email</label>
+                <input type="email" id="userEmail" name="userEmail" required>
+            </div>
+            <div class="form-group input-box">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SUBMIT">
+            </div>
+        </form>
+    
+          
+        
+        
 </body>
 </html>
 
