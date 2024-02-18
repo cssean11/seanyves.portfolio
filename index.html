@@ -432,6 +432,41 @@ input[type="submit"]:hover {
     background-color: #FF8C00; /* Adjust hover background color if needed */
 }
 
+.project-container {
+        text-align: center; /* Center the contents horizontally */
+
+       /* Adjust margin as needed */
+    }
+
+    .view-netflix-repo-button,
+    .view-syportfolio-repo-button {
+        
+   
+       
+        background-color: transparent;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .view-netflix-repo-button:hover,
+    .view-syportfolio-repo-button:hover {
+        background-color: white;
+        color: black; /* Change text color on hover if needed */
+    }
+
+    .view-netflix-repo-button {
+        margin-right: 254px;
+        margin-top: 20px;
+       /* Adjust margin as needed */
+    }
+
+    .view-syportfolio-repo-button {
+        margin-left: 870px; /* Adjust margin as needed */
+    }
+
+
+
 
 
 
@@ -499,50 +534,32 @@ input[type="submit"]:hover {
     
         
         <hr><!-- Only one white line -->
-        <h2>
-            <span style="font-weight: bold; font-size: 30;">Projects</span>
-            <span class="arrow">&#129126;</span>
-        </h2>
-        <!-- Projects Section -->
-        <div id="board"></div>
-    <div class="message"></div>
-    <button class="reset-button" onclick="resetGame()">Reset Game</button>
-        <!-- Calculator -->
-        <div class="calculator">
-            <input type="text" id="calculator-screen" readonly>
-            <button onclick="appendToScreen('7')">7</button>
-            <button onclick="appendToScreen('8')">8</button>
-            <button onclick="appendToScreen('9')">9</button>
-            <button class="operator" onclick="appendToScreen('/')">/</button>
-        
-            <button onclick="appendToScreen('4')">4</button>
-            <button onclick="appendToScreen('5')">5</button>
-            <button onclick="appendToScreen('6')">6</button>
-            <button class="operator" onclick="appendToScreen('*')">*</button>
-        
-            <button onclick="appendToScreen('1')">1</button>
-            <button onclick="appendToScreen('2')">2</button>
-            <button onclick="appendToScreen('3')">3</button>
-            <button class="operator" onclick="appendToScreen('-')">-</button>
-        
-            <button onclick="appendToScreen('0')">0</button>
-            <button onclick="appendToScreen('.')">.</button>
-            <button class="operator" onclick="calculate()">=</button>
-            <button class="operator double" onclick="appendToScreen('+')">+</button>
-        
-            <button class="operator" onclick="clearScreen()">C</button>
-        </div>
-        
-       
+    <!-- ... (Previous content) ... -->
 
-        
-        <!-- ... (Remaining content) ... -->
+<h2>
+    <span style="font-weight: bold;">Projects</span>
+    <span class="arrow">&#129126;</span>
+</h2>
+
+<!-- Netflix Image -->
+<img src="netflix.png" alt="Netflix Logo" style="width: 440px; height: 290px; margin-left: 100px; margin-top: 20px;">
+<img src="sybportfolio.png" alt="SYPortfolio Logo" style="width: 440px; height: 290px; margin-left: 120px; margin-top: 10px;">
+
+<div class="project-container">
+    
+    <a href="https://github.com/your-netflix-repo" target="_blank" class="view-netflix-repo-button">View Repository</a>
+</div>
+
+<!-- SYPortfolio Image and Repository Button Container -->
+<div class="project-container">
+    
+    <a href="https://github.com/your-syportfolio-repo" target="_blank" class="view-syportfolio-repo-button">View Repository</a>
+</div>
+
+
      
-    </div>
-    <div>
-     <img src="dancing.gif" alt="Dancing GIF" class="dancing-gif">
     </body>  
-    </div>
+    
    
 
 
@@ -552,7 +569,7 @@ input[type="submit"]:hover {
         </audio>
         
         <audio id="audioPlayer" autoplay loop muted>
-            <source src="seanyvesportfolio.mp3" type="audio/mp3">
+            <source src="portfoliomusic.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
        
@@ -606,129 +623,7 @@ input[type="submit"]:hover {
                 toggleButton.style.color = isDarkTheme ? "black" : "white";
             }
         </script>
-        <script>
-            let screen = document.getElementById('calculator-screen');
         
-            function appendToScreen(value) {
-                screen.value += value;
-            }
-        
-            function clearScreen() {
-                screen.value = '';
-            }
-        
-            function calculate() {
-                try {
-                    const result = eval(screen.value);
-                    screen.value = result;
-                } catch (error) {
-                    screen.value = 'Error';
-                }
-            }
-        </script>
-       <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const board = document.getElementById('board');
-            const cells = Array.from({ length: 9 }, (_, index) => createCell(index));
-            let currentPlayer = 'X';
-            let gameBoard = ['', '', '', '', '', '', '', '', ''];
-            let winner = null;
-
-            cells.forEach(cell => board.appendChild(cell));
-
-            function createCell(index) {
-                const cell = document.createElement('div');
-                cell.classList.add('cell');
-                cell.addEventListener('click', () => handleCellClick(index));
-                return cell;
-            }
-
-            function handleCellClick(index) {
-                if (gameBoard[index] === '' && !winner) {
-                    gameBoard[index] = currentPlayer;
-                    cells[index].textContent = currentPlayer;
-                    cells[index].classList.add(currentPlayer.toLowerCase());
-                    togglePlayer();
-
-                    checkWinner();
-
-                    if (currentPlayer === 'O' && !winner) {
-                        setTimeout(() => {
-                            makeAIMove();
-                            checkWinner();
-                        }, 100);
-                    }
-                }
-            }
-
-            function togglePlayer() {
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            }
-
-            function checkWinner() {
-                const winningCombos = [
-                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
-                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
-                    [0, 4, 8], [2, 4, 6]
-                ];
-
-                for (const combo of winningCombos) {
-                    const [a, b, c] = combo;
-                    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                        winner = gameBoard[a];
-                        displayWinner();
-                        return;
-                    }
-                }
-
-                if (!gameBoard.includes('')) {
-                    winner = 'T';
-                    displayWinner();
-                }
-            }
-
-            function displayWinner() {
-                const message = document.querySelector('.message');
-                if (winner === 'T') {
-                    message.textContent = "It's a Tie!";
-                } else if (winner) {
-                    message.textContent = `Player ${winner} won!`;
-                }
-            }
-
-            function makeAIMove() {
-                const bestMove = getBestMove(gameBoard, 'O');
-                if (bestMove !== undefined) {
-                    gameBoard[bestMove] = 'O';
-                    cells[bestMove].textContent = 'O';
-                    cells[bestMove].classList.add('o');
-                    togglePlayer();
-                }
-            }
-
-            function getBestMove(board, player) {
-                // The minimax and getEmptyCells functions remain unchanged
-                // ...
-
-                return bestMove;
-            }
-
-            function resetGame() {
-                currentPlayer = 'X';
-                gameBoard = ['', '', '', '', '', '', '', '', ''];
-                winner = null;
-                cells.forEach(cell => {
-                    cell.textContent = '';
-                    cell.classList.remove('x', 'o');
-                });
-                const message = document.querySelector('.message');
-                message.textContent = '';
-            }
-
-            const resetButton = document.querySelector('.reset-button');
-            resetButton.addEventListener('click', resetGame);
-        });
-    </script>
         <hr class="horizontal-line">
 
     
@@ -766,6 +661,7 @@ input[type="submit"]:hover {
         
 </body>
 </html>
+
 
 
 
