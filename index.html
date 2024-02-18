@@ -439,21 +439,18 @@ input[type="submit"]:hover {
     }
 
     .view-netflix-repo-button,
-    .view-syportfolio-repo-button {
-        
-   
-       
-        background-color: transparent;
-        color: white;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s;
-    }
+.view-syportfolio-repo-button {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Only transition for text color */
+}
 
-    .view-netflix-repo-button:hover,
-    .view-syportfolio-repo-button:hover {
-        background-color: white;
-        color: black; /* Change text color on hover if needed */
-    }
+.view-netflix-repo-button:hover,
+.view-syportfolio-repo-button:hover {
+    color: #FF6200; /* Orange text color on hover */
+}
+
 
     .view-netflix-repo-button {
         margin-right: 254px;
@@ -661,6 +658,7 @@ input[type="submit"]:hover {
         
 </body>
 </html>
+
 
 
 
